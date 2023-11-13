@@ -2,20 +2,28 @@ import React from "react";
 import {
     HeaderContainer, Header, SkipToContent, HeaderMenuButton, HeaderName,
     HeaderNavigation, HeaderMenu, HeaderMenuItem, HeaderGlobalBar,
-    HeaderGlobalAction, SideNav, SideNavItems, Content,
-    SideNavMenu, SideNavMenuItem, Theme
+    HeaderGlobalAction, SideNav, SideNavItems, Content, SideNavMenuItem, Theme, SideNavDivider
 } from '@carbon/react';
 import {
     Notification,
     Search,
     Switcher,
-    Fade,
 } from '@carbon/react/icons';
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
 
 import ErrorBoundary from "../../components/ErrorBoundary";
 import LandingPage from '../LandingPage';
 import NotFound from '../../components/NotFound';
+import Asset from "../Asset/Asset";
+import Workorder from "../Workorder/Workorder";
+import Location from "../Location/Location";
+import Person from "../Person/Person";
+import User from "../User/User";
+import AssetView from "../Asset/AssetView";
+import WorkorderView from "../Workorder/WorkorderView";
+import LocationView from "../Location/LocationView";
+import PersonView from "../Person/PersonView";
+import UserView from "../User/UserView";
 
 
 class UIShell extends React.Component {
@@ -30,7 +38,7 @@ class UIShell extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                <Theme theme='g90'>
+                <Theme theme='g10'>
                     <HeaderContainer
                         render={({ isSideNavExpanded, onClickSideNavExpand }) => (
                             <div>
@@ -41,8 +49,8 @@ class UIShell extends React.Component {
                                         onClick={onClickSideNavExpand}
                                         isActive={isSideNavExpanded}
                                     />
-                                    <HeaderName href="#" prefix="Carbon">
-                                        Template
+                                    <HeaderName href="#" prefix="Asset">
+                                        Lift
                                     </HeaderName>
                                     <HeaderNavigation aria-label="Carbon React App">
                                         <HeaderMenuItem href="#">Contributing</HeaderMenuItem>
@@ -78,7 +86,34 @@ class UIShell extends React.Component {
                                                     onClick={() => { this.setState({ activeItem: '/' }) }}>
                                                     Overview
                                                 </SideNavMenuItem>
-                                                <SideNavMenu renderIcon={Fade} title="Inventory" defaultExpanded>
+                                                {/* divider here */}
+                                                <SideNavDivider/>
+                                                <SideNavMenuItem element={Link} to='/assets'
+                                                    isActive={this.state.activeItem === '/assets'}
+                                                    onClick={() => { this.setState({ activeItem: '/assets' }) }}>
+                                                    Assets
+                                                </SideNavMenuItem>
+                                                <SideNavMenuItem element={Link} to='/workorders'
+                                                    isActive={this.state.activeItem === '/workorders'}
+                                                    onClick={() => { this.setState({ activeItem: '/workorders' }) }}>
+                                                    Work Orders
+                                                </SideNavMenuItem>
+                                                <SideNavMenuItem element={Link} to='/locations'
+                                                    isActive={this.state.activeItem === '/locations'}
+                                                    onClick={() => { this.setState({ activeItem: '/locations' }) }}>
+                                                    Locations
+                                                </SideNavMenuItem>
+                                                <SideNavMenuItem element={Link} to='/persons'
+                                                    isActive={this.state.activeItem === '/persons'}
+                                                    onClick={() => { this.setState({ activeItem: '/persons' }) }}>
+                                                    Persons
+                                                </SideNavMenuItem>
+                                                <SideNavMenuItem element={Link} to='/users'
+                                                    isActive={this.state.activeItem === '/users'}
+                                                    onClick={() => { this.setState({ activeItem: '/users' }) }}>
+                                                    Users
+                                                </SideNavMenuItem>
+                                                {/* <SideNavMenu renderIcon={Fade} title="Inventory" defaultExpanded>
                                                     <SideNavMenuItem element={Link} to='/inventory/items'
                                                         isActive={this.state.activeItem === '/inventory/items'}
                                                         onClick={() => { this.setState({ activeItem: '/inventory/items' }) }}>
@@ -105,7 +140,7 @@ class UIShell extends React.Component {
                                                     <SideNavMenuItem href="#">
                                                         Link
                                                     </SideNavMenuItem>
-                                                </SideNavMenu>
+                                                </SideNavMenu> */}
                                             </SideNavItems>
                                         </SideNav>
                                     </ErrorBoundary>
@@ -118,6 +153,16 @@ class UIShell extends React.Component {
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route path="*" element={<NotFound />} />
+                        <Route path="/assets" element={<Asset />} />
+                        <Route path="/workorders" element={<Workorder />} />
+                        <Route path="/locations" element={<Location />} />
+                        <Route path="/persons" element={<Person />} />
+                        <Route path="/users" element={<User />} />
+                        <Route path="/assetview" element={<AssetView />} />
+                        <Route path="/workorderview" element={<WorkorderView />} />
+                        <Route path="/locationview" element={<LocationView />} />
+                        <Route path="/personview" element={<PersonView />} />
+                        <Route path="/userview" element={<UserView />} />
                     </Routes>
                 </Content>
             </BrowserRouter>
